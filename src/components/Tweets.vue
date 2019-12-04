@@ -41,7 +41,7 @@ export default class Tweets extends Vue {
 
   private updateSource (userType: string) {
     this.userType = userType
-    console.log(userType)
+    // console.log(userType)
   }
 }
 </script>

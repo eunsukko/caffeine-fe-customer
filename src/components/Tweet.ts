@@ -1,7 +1,7 @@
-import Vue from "vue";
+import Vue from 'vue'
 
 export default Vue.extend({
-  template:  `
+  template: `
     <div class="tweet">
       <div class="box">
         <article class="media">
