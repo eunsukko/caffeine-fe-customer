@@ -12,8 +12,7 @@ jobs:
     - name: github-build
       run: |
       docker build . --file Dockerfile --tag kangmin46/frontend-customer:latest
-      ls -al
-
+      
     - name: docker image push
       run: |
         docker login -u ${{secrets.DOCKER_USER_NAME}} --password ${{secrets.DOCKER_USER_PASSWORD}}
