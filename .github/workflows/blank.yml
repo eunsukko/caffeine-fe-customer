@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: npm-build
+      run : |
+      npm run build 
     - name: github-build
       run: docker build . --file Dockerfile --tag kangmin46/frontend-customer:latest 
     - name: docker image push
