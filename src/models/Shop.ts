@@ -22,23 +22,28 @@ export default class Shop {
     this.phone = phone
   }
 
-  public static of (json: any) {
+  public static of (obj: any) {
     return new Shop(
-      json.id,
-      json.name,
-      json.img,
-      json.address,
-      json.phone
+      obj.id,
+      obj.name,
+      obj.img,
+      obj.address,
+      obj.phone
     )
   }
 
+  public static ofJson (json: string) {
+    let obj: string = JSON.parse(json)
+    return this.of(obj)
+  }
+
   public toJson () {
-    return {
+    return JSON.stringify({
       id: this.id,
       name: this.name,
       img: this.img,
       address: this.address,
       phone: this.phone
-    }
+    })
   }
 }

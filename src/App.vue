@@ -8,7 +8,7 @@
           <router-link to="/">Home</router-link> |
           <router-link to="/about">About</router-link> |
           <router-link to="/shops">Shops</router-link> |
-          <router-link to="/shops/1/menus">Menu</router-link> |
+          <router-link to="/shops/1/menu">Menu</router-link> |
           <router-link to="/order">Order</router-link>
         </div>
       </div>

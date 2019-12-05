@@ -1,5 +1,5 @@
 <template>
-  <div class="shop" @click="showMenuPage()">
+  <div class="shop" @click="selectShop()">
     <v-list-item>
       <v-list-item-avatar size="62" tile="true">
         <v-img :src="shop.img" ></v-img>
@@ -24,8 +24,13 @@ import Shop from '@/models/Shop'
 export default class ShopListElement extends Vue {
   @Prop() private shop!: Shop;
 
+  private selectShop () {
+    localStorage.currentShopJson = this.shop.toJson()
+    this.showMenuPage()
+  }
+
   private showMenuPage () {
-    this.$router.push({ path: `/shops/${this.shop.id}/menus` })
+    this.$router.push({ path: `/shops/${this.shop.id}/menu` })
   }
 }
 
