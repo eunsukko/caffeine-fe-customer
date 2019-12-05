@@ -13,6 +13,7 @@ jobs:
       run : |
        npm install 
        npm run build 
+       ls -al
     - name: github-build
       run: docker build . --file Dockerfile --tag kangmin46/frontend-customer:latest 
     - name: docker image push
