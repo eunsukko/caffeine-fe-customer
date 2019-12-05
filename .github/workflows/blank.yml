@@ -15,5 +15,6 @@ jobs:
       run: |
         docker login -u ${{secrets.DOCKER_USER_NAME}} --password ${{secrets.DOCKER_USER_PASSWORD}}
         docker push kangmin46/frontend-customer:latest
-        ssh -i ${{secrets.EC2_KEY}} ubuntu@ec2-52-79-40-184.ap-northeast-2.compute.amazonaws.com
+    - name : access ec2
+        ssh -i "${{secrets.EC2_KEY}}" ubuntu@ec2-52-79-40-184.ap-northeast-2.compute.amazonaws.com
         git clone https://github.com/EDD-season2/caffeine.git
