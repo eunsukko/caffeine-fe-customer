@@ -22,6 +22,14 @@ export default class Shop {
     this.phone = phone
   }
 
+  public static emptyShop: Shop = new Shop(
+    '0',
+    'empty_shop',
+    'empty_img',
+    'empty_address',
+    'empty_phone'
+  )
+
   public static of (obj: any) {
     return new Shop(
       obj.id,

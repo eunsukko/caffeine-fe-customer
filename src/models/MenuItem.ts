@@ -22,25 +22,38 @@ export default class MenuItem {
     this.category = category
   }
 
-  public static of (json: any) {
+  public static emptyMenuItem: MenuItem = new MenuItem(
+    'empty_id',
+    'empty_name',
+    'empty_nameInEnglish',
+    'empty_img',
+    'empty_price',
+    'empty_category'
+  )
+
+  public static ofJson (json: string) {
+    return this.of(JSON.parse(json))
+  }
+
+  public static of (obj: any) {
     return new MenuItem(
-      json.id,
-      json.name,
-      json.nameInEnglish,
-      json.img,
-      json.price,
-      json.category
+      obj.id,
+      obj.name,
+      obj.nameInEnglish,
+      obj.img,
+      obj.price,
+      obj.category
     )
   }
 
   public toJson () {
-    return {
+    return JSON.stringify({
       id: this.id,
       name: this.name,
       nameInEnglish: this.nameInEnglish,
       img: this.img,
       price: this.price,
       category: this.category
-    }
+    })
   }
 }

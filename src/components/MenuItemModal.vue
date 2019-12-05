@@ -23,7 +23,7 @@
     </v-container>
     <v-card-actions>
       <v-btn color="blue darken-1" text @click="finishDialog">취소</v-btn>
-      <v-btn color="blue darken-1" text @click="finishDialog">바로구매</v-btn>
+      <v-btn color="blue darken-1" text @click="orderCurrentMenuItem">바로구매</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -37,6 +37,11 @@ import MenuItem from '@/models/MenuItem'
 export default class MenuItemModal extends Vue {
   @Prop() private menuItem!: MenuItem
 
+  private orderCurrentMenuItem () {
+    localStorage.currentMenuItemJson = this.menuItem.toJson()
+    this.finishDialog()
+    this.$router.push({ path: `/order` })
+  }
   // 부모 컴포넌트에게 'finishDialog' 이벤트를 전달
   // 부모 컴포넌트에게 무언가 발생했다는 신호만 보냄
   private finishDialog () {
