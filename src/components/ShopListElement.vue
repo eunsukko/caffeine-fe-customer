@@ -1,20 +1,17 @@
 <template>
-  <div class="shop">
-    <div class="box">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image">
-            <img :src="shop.img">
-          </figure>
-        </div>
-        <div class="media-content">
-          <div class="content">
-            <p><strong>{{shop.name}}</strong> <small>{{shop.phone}}</small></p>
-            <p>{{shop.address}}</p>
-          </div>
-        </div>
-      </article>
-    </div>
+  <div class="shop" @click="showMenuPage()">
+    <v-list-item>
+      <v-list-item-avatar size="62" tile="true">
+        <v-img :src="shop.img" ></v-img>
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <v-row xs12>
+          <v-col align-self="start"><p><strong>{{shop.name}}</strong></p></v-col>
+          <v-col align-self="end"><small>{{shop.phone}}</small></v-col>
+        </v-row>
+        <v-list-item-title>{{shop.address}}</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
   </div>
 </template>
 
@@ -26,6 +23,10 @@ import Shop from '@/models/Shop'
 @Component
 export default class ShopListElement extends Vue {
   @Prop() private shop!: Shop;
+
+  private showMenuPage () {
+    this.$router.push({ path: `/shops/${this.shop.id}/menus` })
+  }
 }
 
 </script>
@@ -48,25 +49,8 @@ p {
     margin-top: 5px;
   }
 }
-
-.shop {
-  background-color: #fff;
-  color: #373737;
-  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-  padding: 30px;
-  + .shop {
-    margin-top: 20px;
-  }
-  .media {
-    display: flex;
-  }
-  img {
-    width: 64px;
-    margin-right: 15px;
-  }
-  small {
-    font-size: 14px;
-    color: #657786;
-  }
+small {
+  font-size: 14px;
+  color: #657786;
 }
 </style>

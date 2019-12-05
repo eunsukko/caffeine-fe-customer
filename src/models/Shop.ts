@@ -2,7 +2,7 @@
 export default class Shop {
   // getter 를 만들어줘야 할 것 같다
   // _id 처럼 이름을 짓고서 get 을 통해 접근?
-  private id: string;
+  public id: string;
   private name: string;
   private img: string;
   private address: string;

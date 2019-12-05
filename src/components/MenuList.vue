@@ -1,6 +1,14 @@
 <template>
   <div id="menu-list">
-    <MenuListElement v-for="menuItem in menuItems" :menuItem="menuItem" :key="menuItem.id" />
+    <v-list>
+      <template v-for="(menuItem, index) in menuItems">
+        <v-subheader v-if="index === 0" :key="'subheader' + index" >주문 가능한 메뉴</v-subheader>
+        <v-divider
+          :key="'divider' + index"
+        ></v-divider>
+        <MenuListElement :menuItem="menuItem" :key="menuItem.id" />
+      </template>
+    </v-list>
   </div>
 </template>
 

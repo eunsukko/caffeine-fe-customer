@@ -1,6 +1,12 @@
 <template>
   <div id="shop-list">
-    <ShopListElement v-for="shop in shops" :shop="shop" :key="shop.id" />
+    <v-list>
+      <template v-for="(shop, index) in shops">
+        <v-subheader v-if="index === 0" :key="'subheader' + index" >주문 가능한 매장</v-subheader>
+        <v-divider :key="'divider' + index"></v-divider>
+        <ShopListElement :shop="shop" :key="shop.id" @click="hello()"/>
+      </template>
+    </v-list>
   </div>
 </template>
 
@@ -18,6 +24,14 @@ import Shop from '@/models/Shop'
 })
 export default class ShopList extends Vue {
   @Prop() private shops!: Shop[];
+
+  private showMenus (event: Event) {
+    alert('Hello ' + event)
+  }
+
+  private hello () {
+    console.error('hello')
+  }
 }
 </script>
 
