@@ -13,10 +13,8 @@ jobs:
       run : |
        npm install 
        npm run build 
-       ls -al
-       pwd
-    - name: github-build
-      run: docker build . --file Dockerfile --tag kangmin46/frontend-customer:latest 
+       docker build . --file Dockerfile --tag kangmin46/frontend-customer:latest 
+       ls -al    
     - name: docker image push
       run: |
         docker login -u ${{secrets.DOCKER_USER_NAME}} --password ${{secrets.DOCKER_USER_PASSWORD}}
