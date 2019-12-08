@@ -4,7 +4,7 @@
       <v-dialog v-model="dialog" persistent scrollable max-width="540px">
         <template v-slot:activator="{ on }">
           <v-list-item v-on="on">
-            <v-list-item-avatar size="62" tile="isListItemAvatarTile">
+            <v-list-item-avatar size="62" tile>
                <v-img :src="menuItem.img"></v-img>
                </v-list-item-avatar>
             <v-list-item-content>
@@ -38,12 +38,6 @@ export default class MenuListElement extends Vue {
   @Prop() private menuItem!: MenuItem;
   @Prop({ default: '' }) private dialogm1!: string;
   @Prop({ default: false }) private dialog!: boolean;
-
-  // 크롬에서 경고가 뜨는데 파악이 필요
-  // [Vue warn]: Invalid prop: type check failed for prop "tile". Expected Boolean, got String with value "isListItemAvatarTile".
-  get isListItemAvatarTile (): boolean {
-    return true
-  }
 }
 </script>
 

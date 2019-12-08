@@ -2,6 +2,7 @@
   <div id="shops">
     <div class="view">
       <h2>Shops list..!</h2>
+      <SearchToolbars :title="'매장 검색'" />
       <ShopList :shops="shopsFromServer" />
     </div>
   </div>
@@ -10,6 +11,7 @@
 <script lang=ts>
 import { Prop, Component, Vue } from 'vue-property-decorator'
 import ShopList from '@/components/ShopList.vue'
+import SearchToolbars from '@/components/toolbars/SearchToolbars.vue'
 
 import Shop from '@/models/Shop'
 
@@ -17,7 +19,8 @@ import Shop from '@/models/Shop'
 // 결국 데이터를 서버에서 가져오는 역할?
 @Component({
   components: {
-    ShopList
+    ShopList,
+    SearchToolbars
   }
 })
 export default class ShopsPage extends Vue {

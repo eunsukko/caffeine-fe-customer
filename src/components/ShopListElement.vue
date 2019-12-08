@@ -1,11 +1,11 @@
 <template>
   <div class="shop" @click="selectShop()">
     <v-list-item>
-      <v-list-item-avatar size="62" tile="true">
+      <v-list-item-avatar size="72" tile>
         <v-img :src="shop.img" ></v-img>
       </v-list-item-avatar>
       <v-list-item-content>
-        <v-row xs12>
+        <v-row cols="12">
           <v-col align-self="start"><p><strong>{{shop.name}}</strong></p></v-col>
           <v-col align-self="end"><small>{{shop.phone}}</small></v-col>
         </v-row>

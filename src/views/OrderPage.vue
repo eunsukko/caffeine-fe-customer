@@ -61,7 +61,7 @@
           <v-btn color="blue darken-1" text >취소</v-btn>
         </v-col>
         <v-col cols="4" align-self="end" class="ma-12">
-          <v-btn color="blue darken-1" text >결재</v-btn>
+          <v-btn color="blue darken-1" text >결제</v-btn>
         </v-col>
       </v-row>
     </v-container>

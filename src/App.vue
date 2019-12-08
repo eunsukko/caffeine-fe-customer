@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app light>
     <v-content>
       <div id="app">
          <!-- 일단은 단일 페이지로 만들어보자

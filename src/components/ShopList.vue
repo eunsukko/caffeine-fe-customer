@@ -3,7 +3,7 @@
     <v-list>
       <template v-for="(shop, index) in shops">
         <v-subheader v-if="index === 0" :key="'subheader' + index" >주문 가능한 매장</v-subheader>
-        <v-divider :key="'divider' + index"></v-divider>
+        <v-divider :key="'divider' +index"></v-divider>
         <ShopListElement :shop="shop" :key="shop.id" @click="hello()"/>
       </template>
     </v-list>
@@ -36,8 +36,5 @@ export default class ShopList extends Vue {
 </script>
 
 <style lang="scss" scoped>
-#shop-list {
-  max-width: 600px;
-  margin: 30px auto;
-}
+
 </style>

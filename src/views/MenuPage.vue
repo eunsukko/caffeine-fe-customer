@@ -1,6 +1,7 @@
 <template>
   <div class="menu-page">
     <h2>Menu page..!!</h2>
+    <CartToolbars :title="'전체 메뉴'" />
     <MenuList :menuItems="menuItemsFromServer" />
   </div>
 </template>
@@ -9,12 +10,14 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 import MenuList from '@/components/MenuList.vue'
+import CartToolbars from '@/components/toolbars/CartToolbars.vue'
 
 import MenuItem from '@/models/MenuItem'
 
 @Component({
   components: {
-    MenuList
+    MenuList,
+    CartToolbars
   }
 })
 export default class MenuPage extends Vue {
