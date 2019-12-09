@@ -36,7 +36,6 @@ import MenuItem from '@/models/MenuItem'
 })
 export default class MenuListElement extends Vue {
   @Prop() private menuItem!: MenuItem;
-  @Prop({ default: '' }) private dialogm1!: string;
   @Prop({ default: false }) private dialog!: boolean;
 }
 </script>

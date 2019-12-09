@@ -1,7 +1,6 @@
 <template>
   <div id="shops">
     <div class="view">
-      <h2>Shops list..!</h2>
       <SearchToolbars :title="'매장 검색'" />
       <ShopList :shops="shopsFromServer" />
     </div>

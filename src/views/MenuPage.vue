@@ -37,17 +37,14 @@ export default class MenuPage extends Vue {
     }
 
     let shopId:string = this.$route.params.shop_id
-    console.log(this.$route.params)
     const menuObjs = menusObjs.get(shopId)
     if (!menuObjs) {
-      console.error('not exist shopId: ' + shopId)
       return []
     }
     const menuItems = menuObjs.map(function (item, index, array) {
       return MenuItem.of(item)
     })
 
-    console.log(menuItems)
     return menuItems
   }
 }

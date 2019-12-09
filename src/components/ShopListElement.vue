@@ -1,4 +1,5 @@
 <template>
+  <!-- [TODO] click 에서 함수로 부를때와 함수 레퍼런스를 부를 때의 차이? (둘다 작동함) -->
   <div class="shop" @click="selectShop()">
     <v-list-item>
       <v-list-item-avatar size="72" tile>
