@@ -12,4 +12,4 @@
 $ npm install -g json-server
 
 ## 실행하기
-$ json-server --watch db.json --routes routes.json --middlewares singular.js
+$ json-server --watch db.json --routes routes.json --middlewares singular.js --port 33333

@@ -1,11 +1,11 @@
 <template>
   <div id="order-page">
-    <h2>Order page..!!</h2>
+    <CartToolbars title="주문"/>
     <v-container>
       <v-spacer></v-spacer>
       <v-row dense>
         <v-col cols="12">
-          <v-card dark class="pa-3">
+          <v-card dark class="pa-3 brown darken-4">
             <span> 주문 매장 </span>
           </v-card>
         </v-col>
@@ -30,7 +30,7 @@
           </v-card>
         </v-col>
         <v-col cols="12">
-          <v-card dark class="pa-3">
+          <v-card dark class="pa-3 brown darken-4">
             <span> 최종 결제할 메뉴 </span>
           </v-card>
         </v-col>
@@ -71,11 +71,14 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
+import CartToolbars from '@/components/toolbars/CartToolbars.vue'
+
 import Shop from '@/models/Shop'
 import MenuItem from '@/models/MenuItem'
 
 @Component({
   components: {
+    CartToolbars
   }
 })
 export default class OrderPage extends Vue {

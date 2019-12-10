@@ -3,7 +3,8 @@
 module.exports = (req, res, next) => {
   const _send = res.send
   res.send = function (body) {
-    if (require('url').parse(req.url, true).query['singular']) {
+    const url =require('url')
+    if (url.parse(req.url, true).query['singular']) {
       // console.error('singular called: ' + JSON.stringify(req))
       try {
         const json = JSON.parse(body)
