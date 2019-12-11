@@ -1,9 +1,10 @@
 'use strict'
 
+// https://github.com/typicode/json-server/issues/541#issuecomment-307300368
 module.exports = (req, res, next) => {
   const _send = res.send
   res.send = function (body) {
-    const url =require('url')
+    const url = require('url')
     if (url.parse(req.url, true).query['singular']) {
       // console.error('singular called: ' + JSON.stringify(req))
       try {
