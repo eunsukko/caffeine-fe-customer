@@ -24,7 +24,7 @@
                 size="96"
                 tile
               >
-                <v-img :src="shop.img"></v-img>
+                <v-img :src="shop.image"></v-img>
               </v-avatar>
             </div>
           </v-card>
@@ -49,7 +49,7 @@
                 size="92"
                 tile
               >
-                <v-img :src="currentMenuItem.img"></v-img>
+                <v-img :src="currentMenuItem.image"></v-img>
               </v-avatar>
             </div>
           </v-card>

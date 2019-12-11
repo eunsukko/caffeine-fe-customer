@@ -5,7 +5,7 @@
         <template v-slot:activator="{ on }">
           <v-list-item v-on="on">
             <v-list-item-avatar size="62" tile>
-               <v-img :src="menuItem.img"></v-img>
+               <v-img :src="menuItem.image"></v-img>
                </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title><strong>{{menuItem.name}}</strong></v-list-item-title>
