@@ -10,7 +10,7 @@
         <v-col class="xs2" >
           <v-avatar size="92">
             <v-img
-              :src="menuItem.img"
+              :src="menuItem.image"
             ></v-img>
           </v-avatar>
         </v-col>
