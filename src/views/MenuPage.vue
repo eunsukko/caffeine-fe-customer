@@ -41,7 +41,7 @@ export default class MenuPage extends Vue {
       const response = await axios.get(this.menuPageUrl)
       const data:any = response.data
 
-      this.updateMenuItemsFrom(response.data.menu)
+      this.updateMenuItemsFrom(response.data)
     } catch (error) {
       // [TODO] 예외처리
       // console.log(error)
@@ -65,7 +65,7 @@ export default class MenuPage extends Vue {
   }
 
   get menuPageUrl () :string {
-    return String.Format('{0}/shops/{1}/menu', WebConfig.API_SERVER_RUL, this.currentShopId)
+    return WebConfig.API_SERVER_RUL + String.Format('/shops/{1}/menus', this.currentShopId)
   }
 
   get currentShopId () :string {

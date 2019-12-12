@@ -5,7 +5,7 @@
   >
     <!-- 컴포넌트로 묶기 -->
     <v-container>
-      <v-row cols="12">
+      <v-row cols="12" class="ma-0">
         <v-col cols="4" class="mr-2">
           <v-avatar size="92">
             <v-img
@@ -17,6 +17,9 @@
           <p><strong>{{menuItem.name}}</strong></p>
           <p>{{menuItem.nameInEnglish}}</p>
           <p><strong>{{menuItem.price}} 원</strong></p>
+        </v-col>
+        <v-col cols="12">
+          <p class="border-brown pa-4">{{menuItem.description}}</p>
         </v-col>
       </v-row>
     </v-container>
@@ -64,3 +67,9 @@ export default class MenuItemModal extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.border-brown {
+  border: solid 1px grey;
+}
+</style>
