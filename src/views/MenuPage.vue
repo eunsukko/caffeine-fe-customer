@@ -29,6 +29,7 @@ import WebConfig from '@/WebConfig'
 })
 export default class MenuPage extends Vue {
   @Prop({ default: 'menu' }) private name!: string;
+
   private menuItems: MenuItem[] = [];
   private loading: boolean = true;
 
@@ -65,7 +66,7 @@ export default class MenuPage extends Vue {
   }
 
   get menuPageUrl () :string {
-    return WebConfig.API_SERVER_RUL + String.Format('/shops/{1}/menus', this.currentShopId)
+    return WebConfig.API_SERVER_RUL + String.Format('/shops/{0}/menus', this.currentShopId)
   }
 
   get currentShopId () :string {
