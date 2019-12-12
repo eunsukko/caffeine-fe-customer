@@ -43,7 +43,8 @@ export default class MenuPage extends Vue {
 
       this.updateMenuItemsFrom(response.data.menu)
     } catch (error) {
-      console.log(error)
+      // [TODO] 예외처리
+      // console.log(error)
     } finally {
       this.finishLoading()
     }
