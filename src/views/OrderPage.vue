@@ -56,12 +56,9 @@
         </v-col>
       </v-row>
       <v-spacer></v-spacer>
-      <v-row cols="12" >
-        <v-col cols="4" align-self="start" class="ma-12">
-          <v-btn color="blue darken-1" text >취소</v-btn>
-        </v-col>
-        <v-col cols="4" align-self="end" class="ma-12">
-          <v-btn color="blue darken-1" text >결제</v-btn>
+      <v-row cols="12" justify="space-between" >
+        <v-col cols="12" justify-self="stretch" class="text-center full-button">
+          <v-btn class="brown darken-1" dark block >바로 주문하기</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -99,7 +96,11 @@ export default class OrderPage extends Vue {
 
 <style lang="scss" scoped>
 #order-page {
-  max-width: 600px;
-  margin: 30px auto;
+  width: 100%;
+  height: 100%;
+}
+
+.full-button {
+  width: 100%;
 }
 </style>
