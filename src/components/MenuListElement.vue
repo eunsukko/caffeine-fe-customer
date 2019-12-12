@@ -15,7 +15,7 @@
             </v-list-item-content>
           </v-list-item>
         </template>
-        <MenuItemModal :menuItem="menuItem" v-on:finishDialog="dialog = false" />
+        <MenuItemModal :menuItem="menuItem" v-on:finishDialog="finishDialog = false" />
       </v-dialog>
     </div>
   </div>
@@ -36,7 +36,12 @@ import MenuItem from '@/models/MenuItem'
 })
 export default class MenuListElement extends Vue {
   @Prop() private menuItem!: MenuItem;
-  @Prop({ default: false }) private dialog!: boolean;
+  // [Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "dialog"
+  @Prop() private dialog!: boolean;
+
+  set finishDialog (value: boolean) {
+    this.dialog = value
+  }
 }
 </script>
 

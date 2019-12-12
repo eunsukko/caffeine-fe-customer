@@ -44,7 +44,8 @@ export default class ShopsPage extends Vue {
       const response = await axios.get(WebConfig.API_SERVER_RUL + ShopsPage.SHOP_PAGE_URL)
       this.updateShopsFrom(response.data)
     } catch (error) {
-      console.error(error)
+      // [TODO] 예외처리
+      // console.error(error)
     } finally {
       this.finishLoading()
     }
