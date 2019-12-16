@@ -115,7 +115,7 @@ export default class OrderPage extends Vue {
 
       alert(response)
     } catch (error) {
-      // console.log(error)
+      console.log(error)
     } finally {
       this.finishLoading()
     }

@@ -25,36 +25,42 @@ export default class App extends Vue {
   private snackbar: boolean = false;
   private snackbarTimeout: number = 7000;
 
+  private dummyCustomerId!: string;
+
   mounted () {
+    console.log('new app instance mounted')
+
+    this.dummyCustomerId = new Date().getUTCMilliseconds().toString()
+    console.log('dummyCustomerId: ' + this.dummyCustomerId)
+
     this.eventSource = this.subscribeNotification()
     this.showShopPage()
   }
 
   private subscribeNotification () :EventSource {
-    // console.log('subscribeNotification begin')
+    console.log('subscribeNotification begin')
 
-    const dummyCustomerId: string = '100'
-    const subscribeUrl: string = WebConfig.API_SERVER_RUL + '/subscribe/customers/' + dummyCustomerId
+    const subscribeUrl: string = WebConfig.API_SERVER_RUL + '/subscribe/customers/' + this.dummyCustomerId
 
     const eventSource: EventSource = new EventSource(subscribeUrl, { withCredentials: true })
 
     eventSource.onmessage = event => {
-      // console.log('on event')
+      console.log('on message event, message: ' + event.data)
       if (this.notificationMessage === App.NOTIFICATION_READY) {
         this.notificationMessage = ''
-        // 여기서 리턴하면 안되느 것 같음
-      } else {
-        this.snackbar = true
-        this.notificationMessage = event.data
+        return
       }
+      this.notificationMessage = event.data
+      this.snackbar = true
     }
 
     eventSource.onerror = event => {
+      console.log('on error event, error: ')
+      console.log(event)
       this.notificationMessage = App.NOTIFICATION_READY
-      this.eventSource = this.subscribeNotification()
     }
 
-    // console.log('subscribeNotification end')
+    console.log('subscribeNotification end')
     return eventSource
   }
 
@@ -62,25 +68,5 @@ export default class App extends Vue {
     this.$router.push('/shops')
   }
 }
-
-// console.log('hello app')
-
-// const subscribe = function () {
-//   console.log('start subscribe')
-
-//   const dummyCustomerId: string = '100'
-
-//   const subscribeUrl: string = WebConfig.API_SERVER_RUL + '/subscribe/customers/' + dummyCustomerId
-
-//   const eventSource: EventSource = new EventSource(subscribeUrl, { withCredentials: true })
-
-//   eventSource.onmessage = event => {
-//     alert(event.data)
-//   }
-
-//   console.log('end subscribe')
-// }
-
-// subscribe()
 
 </script>
