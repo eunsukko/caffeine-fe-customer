@@ -33,8 +33,8 @@ export default class App extends Vue {
     this.dummyCustomerId = new Date().getUTCMilliseconds().toString()
     console.log('dummyCustomerId: ' + this.dummyCustomerId)
 
-    this.eventSource = this.subscribeNotification()
-    this.showShopPage()
+    // this.eventSource = this.subscribeNotification()
+    // this.showShopPage()
   }
 
   private subscribeNotification () :EventSource {

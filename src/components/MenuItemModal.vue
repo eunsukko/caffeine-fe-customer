@@ -45,6 +45,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import BlockButton from '@/components/button/BlockButton.vue'
 
 import MenuItem from '@/models/MenuItem'
+import Order from '@/models/Order'
 
 @Component({
   components: {
@@ -55,9 +56,15 @@ export default class MenuItemModal extends Vue {
   @Prop() private menuItem!: MenuItem
 
   private orderCurrentMenuItem () {
-    localStorage.currentMenuItemJson = this.menuItem.toJson()
+    this.addMenuItemToOrder()
     this.finishDialog()
     this.$router.push({ path: `/order` })
+  }
+
+  private addMenuItemToOrder () {
+    let currentOrder: Order = Order.ofJson(localStorage.currentOrderJson)
+    currentOrder.menuItems = [this.menuItem]
+    localStorage.currentOrderJson = currentOrder.toJson()
   }
 
   // 부모 컴포넌트에게 'finishDialog' 이벤트를 전달

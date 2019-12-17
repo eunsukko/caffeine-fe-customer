@@ -40,16 +40,16 @@
               <div>
                 <v-card-title
                   class="headline"
-                  v-text="currentMenuItem.name"
+                  v-text="menuItems[0].name"
                 ></v-card-title>
-                <v-card-subtitle v-text="currentMenuItem.price + '원'"></v-card-subtitle>
+                <v-card-subtitle v-text="menuItems[0].price + '원'"></v-card-subtitle>
               </div>
               <v-avatar
                 class="ma-3"
                 size="92"
                 tile
               >
-                <v-img :src="currentMenuItem.image"></v-img>
+                <v-img :src="menuItems[0].image"></v-img>
               </v-avatar>
             </div>
           </v-card>
@@ -78,6 +78,8 @@ import ProgressCircular from '@/components/progress/ProgressCircular.vue'
 
 import Shop from '@/models/Shop'
 import MenuItem from '@/models/MenuItem'
+import Order from '@/models/Order'
+
 import WebConfig from '../WebConfig'
 
 @Component({
@@ -90,16 +92,16 @@ export default class OrderPage extends Vue {
   private static readonly DUMMY_CUSTOMER_ID: string = '100'
 
   private shop: Shop = Shop.emptyShop;
-  private currentMenuItem: MenuItem = MenuItem.emptyMenuItem;
+  private menuItems: MenuItem[] = [MenuItem.emptyMenuItem];
   private loading: boolean = false;
 
+  // 매번 화면이 띄워질 때 호출되는 건지 파악 필요
   private mounted () {
     // console.error('mounted called')
-    if (localStorage.currentShopJson) {
-      this.shop = Shop.ofJson(localStorage.currentShopJson)
-    }
-    if (localStorage.currentMenuItemJson) {
-      this.currentMenuItem = MenuItem.ofJson(localStorage.currentMenuItemJson)
+    if (localStorage.currentOrderJson) {
+      const currentOrder: Order = Order.ofJson(localStorage.currentOrderJson)
+      this.shop = currentOrder.shop
+      this.menuItems = currentOrder.menuItems
     }
   }
 
@@ -107,7 +109,9 @@ export default class OrderPage extends Vue {
     this.beginLoading()
     try {
       const orderCreationRequestBody: any = {
-        menuItemId: this.currentMenuItem.id,
+        menuItemIds: this.menuItems.map(function (menuItem: MenuItem, index: number, array: any[]) {
+          return menuItem.id
+        }),
         customerId: OrderPage.DUMMY_CUSTOMER_ID
       }
 
