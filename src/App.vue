@@ -40,16 +40,14 @@ export default class App extends Vue {
   private subscribeNotification () :EventSource {
     console.log('subscribeNotification begin')
 
-    const subscribeUrl: string = WebConfig.API_SERVER_RUL + '/subscribe/customers/' + this.dummyCustomerId
-
-    const eventSource: EventSource = new EventSource(subscribeUrl, { withCredentials: true })
+    const eventSource: EventSource = new EventSource(this.getSubscribeUrl(), { withCredentials: true })
 
     eventSource.onmessage = event => {
       console.log('on message event, message: ' + event.data)
-      if (this.notificationMessage === App.NOTIFICATION_READY) {
-        this.notificationMessage = ''
-        return
-      }
+      // if (this.notificationMessage === App.NOTIFICATION_READY) {
+      //   this.notificationMessage = ''
+      //   return
+      // }
       this.notificationMessage = event.data
       this.snackbar = true
     }
@@ -62,6 +60,10 @@ export default class App extends Vue {
 
     console.log('subscribeNotification end')
     return eventSource
+  }
+
+  private getSubscribeUrl () {
+    return WebConfig.API_SERVER_RUL + '/subscribe/customers'
   }
 
   private showShopPage () {
