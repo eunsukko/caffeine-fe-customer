@@ -25,24 +25,15 @@ export default class App extends Vue {
   private snackbar: boolean = false;
   private snackbarTimeout: number = 7000;
 
-  private dummyCustomerId!: string;
-
   mounted () {
     console.log('new app instance mounted')
-
-    this.dummyCustomerId = new Date().getUTCMilliseconds().toString()
-    console.log('dummyCustomerId: ' + this.dummyCustomerId)
-
     this.eventSource = this.subscribeNotification()
     this.showShopPage()
   }
 
   private subscribeNotification () :EventSource {
     console.log('subscribeNotification begin')
-
-    const subscribeUrl: string = WebConfig.API_SERVER_RUL + '/subscribe/customers/' + this.dummyCustomerId
-
-    const eventSource: EventSource = new EventSource(subscribeUrl, { withCredentials: true })
+    const eventSource: EventSource = new EventSource(this.getSubscribeUrl(), { withCredentials: true })
 
     eventSource.onmessage = event => {
       console.log('on message event, message: ' + event.data)
@@ -62,6 +53,10 @@ export default class App extends Vue {
 
     console.log('subscribeNotification end')
     return eventSource
+  }
+
+  private getSubscribeUrl () {
+    return WebConfig.API_SERVER_RUL + '/subscribe/customers'
   }
 
   private showShopPage () {
