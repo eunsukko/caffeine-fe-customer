@@ -1,6 +1,6 @@
 <template>
   <div id="shops-page">
-    <SearchToolbars :title="'매장 검색'" />
+    <SearchToolbars :title="'매장 검색'" @search-toolbars-text-updated="searchFromServer" />
       <ProgressCircular v-if="loading" />
     <ShopList :shops="shopsFromServer" />
   </div>
@@ -30,6 +30,7 @@ import WebConfig from '@/WebConfig'
 })
 export default class ShopsPage extends Vue {
   private static readonly SHOP_PAGE_URL:string = '/shops'
+  private static readonly SHOP_SEARCH_URL:string = '/shops/search'
 
   @Prop({ default: 'shops' }) name!: string;
   private shops: Shop[] = [];
@@ -52,14 +53,61 @@ export default class ShopsPage extends Vue {
     }
   }
 
-  private updateShopsFrom (shopJsons: any[]) {
-    this.shops = shopJsons.map(function (item: any, index: number, array: any[]) {
-      return Shop.of(item)
+  private updateShopsFrom (shopObjs: any[]) {
+    this.shops = this.removeDuplication(shopObjs)
+  }
+
+  private removeDuplication (shopObjs: any[]) : Shop[] {
+    let shopJsons = shopObjs.map(function (item: any, index: number, array: any[]) {
+      return Shop.of(item).toJson()
+    })
+
+    let shopsWithoutDuplication = new Set<string>(shopJsons)
+
+    return Array.from(shopsWithoutDuplication.values()).map(function (json: string, index: number, array: string[]) {
+      return Shop.ofJson(json)
     })
   }
 
   private finishLoading () {
     this.loading = false
+  }
+
+  private async searchFromServer (searchText: string) {
+    // [TODO] 중복제거
+    try {
+      const searchUrl:string = this.getAddressSearchUrl(searchText)
+
+      const nameSearchResponse = await axios.get(this.getNameSearchUrl(searchText))
+      const addressSearchResponse = await axios.get(this.getAddressSearchUrl(searchText))
+
+      let shopJsons: any[] = nameSearchResponse.data.content
+      shopJsons = shopJsons.concat(addressSearchResponse.data.content)
+
+      this.updateShopsFrom(shopJsons)
+    } catch (error) {
+      console.error('search fail')
+    } finally {
+      this.finishLoading()
+    }
+  }
+
+  private getAddressSearchUrl (searchText: string) {
+    const searchBaseUrl: string = WebConfig.API_SERVER_RUL + ShopsPage.SHOP_SEARCH_URL
+    const searchQuery: string = 'query=keyWord%3Daddress,contents%3D' + searchText
+
+    const defaultPageQuery = '&size=30&page=0'
+
+    return searchBaseUrl + '?' + searchQuery + defaultPageQuery
+  }
+
+  private getNameSearchUrl (searchText: string) {
+    const searchBaseUrl: string = WebConfig.API_SERVER_RUL + ShopsPage.SHOP_SEARCH_URL
+    const searchQuery: string = 'query=keyWord%3Dname,contents%3D' + searchText
+
+    const defaultPageQuery = '&size=30&page=0'
+
+    return searchBaseUrl + '?' + searchQuery + defaultPageQuery
   }
 
   get shopsFromServer () : Shop[] {
