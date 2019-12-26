@@ -10,6 +10,7 @@
 import axios from 'axios'
 
 import { Prop, Component, Vue } from 'vue-property-decorator'
+import { String, StringBuilder } from 'typescript-string-operations'
 
 import ShopList from '@/components/ShopList.vue'
 import SearchToolbars from '@/components/toolbars/SearchToolbars.vue'
@@ -93,18 +94,16 @@ export default class ShopsPage extends Vue {
   }
 
   private getAddressSearchUrl (searchText: string) {
-    const searchBaseUrl: string = WebConfig.API_SERVER_RUL + ShopsPage.SHOP_SEARCH_URL
-    const searchQuery: string = 'query=keyWord%3Daddress,contents%3D' + searchText
-
-    const defaultPageQuery = '&size=30&page=0'
-
-    return searchBaseUrl + '?' + searchQuery + defaultPageQuery
+    return this.getSearchUrl('address', searchText)
   }
 
   private getNameSearchUrl (searchText: string) {
-    const searchBaseUrl: string = WebConfig.API_SERVER_RUL + ShopsPage.SHOP_SEARCH_URL
-    const searchQuery: string = 'query=keyWord%3Dname,contents%3D' + searchText
+    return this.getSearchUrl('name', searchText)
+  }
 
+  private getSearchUrl (keyword: string, searchText: string) {
+    const searchBaseUrl: string = WebConfig.API_SERVER_RUL + ShopsPage.SHOP_SEARCH_URL
+    const searchQuery: string = String.Format('keyword={0}&contents={1}', keyword, searchText)
     const defaultPageQuery = '&size=30&page=0'
 
     return searchBaseUrl + '?' + searchQuery + defaultPageQuery
